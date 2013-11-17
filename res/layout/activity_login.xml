@@ -1,0 +1,109 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal" >
+
+        <ScrollView
+            
+            android:id="@+id/login_form"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/TextView01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="username"
+                    android:textSize="25sp" />
+
+                <EditText
+                    android:id="@+id/user"
+                    android:layout_width="184dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="#FFFFFF"
+                    android:ems="10"
+                    android:hint="your email"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:singleLine="true"/>
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Password"
+                    android:textSize="25sp" />
+
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="184dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="#FFFFFF"
+                    android:hint="your password"
+                    android:imeActionId="@+id/login"
+                    android:imeActionLabel="sign in"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:singleLine="true"/>
+
+
+                <CheckBox
+                    android:id="@+id/rememberMe"
+                    android:layout_width="179dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Remember me"
+				/>
+
+                <CheckBox
+                    android:id="@+id/automaticLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Automatic login"
+				/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="wrap_content" >
+
+                    
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/sign_in_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:textColor="#FFFFFF"
+            android:gravity="bottom|center"
+            android:paddingBottom="8dp"
+            android:text="Sign in"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
+
