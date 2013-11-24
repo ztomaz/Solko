@@ -28,7 +28,7 @@ public class LoginFragment extends Fragment {
 	Dialog myDialog;
 	
 	static String URL = SolkoApplication.getDefaultURL();
-	String url_auth = URL + "/login/api-token-auth";	
+	String url_auth = URL + "/api-token-auth";	
 	
 	
 	String urlToAdd;

@@ -36,7 +36,7 @@ public class LoginFragmentActivity extends FragmentActivity implements OnLoginLi
 	//private ArrayList <Group> groups;
 
 	static String URL = SolkoApplication.getDefaultURL();
-	String url_auth = URL + "/login/api-token-auth";
+	String url_auth = URL + "/api-token-auth";
 	String token;
 	Fragment fragment;
 	private boolean automaticLogin;
@@ -131,7 +131,7 @@ public class LoginFragmentActivity extends FragmentActivity implements OnLoginLi
 								//groups.add(new Group(current_group_id, current_group_name));
 							}
 							token = req.getString("token");
-							group_id = user.getInt("group_id");
+							//group_id = user.getInt("group_id");
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

@@ -13,8 +13,6 @@ public class IntroFragment extends Fragment {
 	
 	private ProgressBar progressDialog;
 	
-	//private String token;
-	//private int group_id;
 	
 	Context context;
 	
