@@ -12,23 +12,24 @@ import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
 public class LoginFragment extends Fragment {
 
-	
 	private String mUsername = "";
-	private String mPassword = "";
+	//private String mPassword = "";
 
 	private EditText mUsernameView;
 	private EditText mPasswordView;
 
 	Dialog myDialog;
 	
+	
 	static String URL = SolkoApplication.getDefaultURL();
-	String url_auth = URL + "/api-token-auth";	
+	String url_auth = URL + "/login/api-token-auth";	
 	
 	
 	String urlToAdd;
@@ -48,7 +49,7 @@ public class LoginFragment extends Fragment {
 	OnLoginListener mLogin;
 	
 	public interface OnLoginListener {
-		public void login(String mUsername, String mPassword);
+		public void login(String mUsername, String mPassword, Boolean usernameChaked, Boolean automaticChacked);
 	}
 	
 	@Override
@@ -82,7 +83,7 @@ public class LoginFragment extends Fragment {
 		SharedPreferences loginSharedPreferences = getActivity().getSharedPreferences("Login", 0);
 		
 		mUsername=loginSharedPreferences.getString("username", "");
-		mPassword=loginSharedPreferences.getString("password", "");
+		//mPassword=loginSharedPreferences.getString("password", "");
 		
 		rememberMe = loginSharedPreferences.getBoolean("rememberMe", false);
 		
@@ -95,11 +96,21 @@ public class LoginFragment extends Fragment {
 		}
 		
 		
+		view.findViewById(R.id.register).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				RegistrationDialogFragment rdf = new RegistrationDialogFragment();
+				rdf.show(getFragmentManager(), "bla");
+			}
+		});
+		
 		view.findViewById(R.id.sign_in_button).setOnClickListener(
-				new View.OnClickListener() {
+				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						mLogin.login(mUsernameView.getText().toString(), mPasswordView.getText().toString());
+						mLogin.login(mUsernameView.getText().toString(), mPasswordView.getText().toString(),
+								rememberUsername.isChecked(), automaticLogin.isChecked());
 					}
 				});
 		

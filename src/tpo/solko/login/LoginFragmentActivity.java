@@ -20,6 +20,7 @@ import tpo.solko.login.LoginFragment.OnLoginListener;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -29,14 +30,13 @@ import android.support.v4.app.FragmentManager;
 import android.widget.FrameLayout;
 
 public class LoginFragmentActivity extends FragmentActivity implements OnLoginListener{
-	 
 	Context context;
 	FrameLayout fragment_content;
 	ArrayList<Fragment> fragments;
 	//private ArrayList <Group> groups;
 
 	static String URL = SolkoApplication.getDefaultURL();
-	String url_auth = URL + "/api-token-auth";
+	String url_auth = URL + "/login/api-token-auth";
 	String token;
 	Fragment fragment;
 	private boolean automaticLogin;
@@ -45,11 +45,18 @@ public class LoginFragmentActivity extends FragmentActivity implements OnLoginLi
 	
 	int group_id;
 	
+	Boolean rememberU = false;
+	Boolean rememberA = false;
+	
+	SharedPreferences introShared;
+	
 	@Override
-	public void login(String mUsername, String mPassword)
+	public void login(String mUsername, String mPassword, Boolean rememberU, Boolean rememberA)
 	{
 		this.mUsername = mUsername;
 		this.mPassword = mPassword;
+		this.rememberU = rememberU;
+		this.rememberA = rememberA;
 		new LoginTask().execute();
 	}
 	
@@ -63,7 +70,7 @@ public class LoginFragmentActivity extends FragmentActivity implements OnLoginLi
          
         fragment_content = (FrameLayout) findViewById(R.id.intro_frame);
        	
-        SharedPreferences introShared = this.getSharedPreferences("Login", 0);
+        introShared = this.getSharedPreferences("Login", 0);
 		automaticLogin = introShared.getBoolean("automatic", false);
 		
 		//groups = new ArrayList<Group>();
@@ -78,10 +85,7 @@ public class LoginFragmentActivity extends FragmentActivity implements OnLoginLi
         fragments.add(new LoginFragment());
 		selectItem(0);
 		
-		if (mUsername != "" && mPassword != "")
-		{
-			new LoginTask().execute();
-		}
+		new LoginTask().execute();
 		            
 	}
 	
@@ -122,16 +126,9 @@ public class LoginFragmentActivity extends FragmentActivity implements OnLoginLi
 					{
 						try{
 							JSONObject user = req.getJSONObject("user");
-							JSONArray group_array = user.getJSONArray("other_groups");
-							for (int i = 0; i < group_array.length(); i++)
-							{
-								JSONObject current_group = group_array.getJSONObject(i);
-								int current_group_id = current_group.getInt("group_id");
-								String current_group_name = current_group.getString("group_name");
-								//groups.add(new Group(current_group_id, current_group_name));
-							}
+							
 							token = req.getString("token");
-							//group_id = user.getInt("group_id");
+							group_id = user.getInt("group_id");
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -163,30 +160,27 @@ public class LoginFragmentActivity extends FragmentActivity implements OnLoginLi
 	public void continueToLists(){
 		SharedPreferences setting = PreferenceManager.getDefaultSharedPreferences(context);
 		SharedPreferences groupSettings = getApplicationContext().getSharedPreferences("current_group_task", 0);
-		/*for (int i = 0; i < groups.size(); i++)
-		{
-			//Group gr = groups.get(i);
-			//groups.get(i).last_used = groupSettings.getInt(String.valueOf(gr.name), -1); 
-		}*/
+		
 		
 		SharedPreferences.Editor editor = setting.edit();
 		editor.putString("token", token);
-		try {
-			setting.getInt("group_id", -1);
-		}
-		catch(ClassCastException e)
+		
+		
+		Editor loginEditor = introShared.edit();
+		if (rememberU)
 		{
-			editor.putInt("group_id", -1);
-			editor.commit();
+			loginEditor.putBoolean("automatic", rememberU);
+			loginEditor.putString("username", mUsername);
 		}
-		
-		
-		if (setting.getInt("group_id", -1) == -1)
-			editor.putInt("group_id", group_id);
-		editor.commit();
+		if (automaticLogin)
+		{
+			loginEditor.putString("username", mUsername);
+			loginEditor.putString("password", mPassword);
+			loginEditor.putBoolean("automatic", rememberA);
+		}
+		loginEditor.commit();
 		
 		Intent intent = new Intent(context, MainActivity.class);
-		//intent.putExtra("groups", groups);
 		startActivity(intent);
 		
 	}

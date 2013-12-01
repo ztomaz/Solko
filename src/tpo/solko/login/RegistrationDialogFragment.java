@@ -1,11 +1,16 @@
 package tpo.solko.login;
 
 
+import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import tpo.solko.R;
 import tpo.solko.RestJsonClient;
 import tpo.solko.SolkoApplication;
+import tpo.solko.School.School;
 
 
 
@@ -17,8 +22,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 public class RegistrationDialogFragment extends DialogFragment  {
  	
@@ -37,7 +44,10 @@ public class RegistrationDialogFragment extends DialogFragment  {
 	
 	String urlToRegister = URL + "user/register";
 
-    
+	
+	Spinner spinner_schools;
+    ArrayAdapter<School> school_adapter;
+	
     @Override
  	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
  		getDialog().setTitle("Registration form");
@@ -50,12 +60,14 @@ public class RegistrationDialogFragment extends DialogFragment  {
 
         emailAddresView = (EditText) v.findViewById(R.id.EditUserName);
         passwordView = (EditText) v.findViewById(R.id.EditPassword);
-        firstNameView = (EditText) v.findViewById(R.id.FirstName);
-        lastNameView = (EditText) v.findViewById(R.id.LastName);
+        
+        spinner_schools = (Spinner) v.findViewById(R.id.spinner_schools);
+        school_adapter = new ArrayAdapter<School> (getActivity(), android.R.layout.simple_spinner_item, new ArrayList<School>());
+        spinner_schools.setAdapter(school_adapter);
+        
         
         //myDialog.show();
         goBack.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				RegistrationDialogFragment.this.dismiss();
@@ -63,7 +75,6 @@ public class RegistrationDialogFragment extends DialogFragment  {
 		});
         login.setOnClickListener(new OnClickListener()
         {
-
            @Override
            public void onClick(View v)
            {
@@ -71,6 +82,9 @@ public class RegistrationDialogFragment extends DialogFragment  {
                    RegistrationDialogFragment.this.dismiss();
            }
        });
+        
+        getAllSchoolsTask galst = new getAllSchoolsTask();
+        galst.execute;
         return v;
  	}
 
@@ -96,6 +110,7 @@ public class RegistrationDialogFragment extends DialogFragment  {
 		
 	}
  	
+	
 	public class UserRegisterTask extends AsyncTask<Void, Void, Boolean> {
 
 		private final ProgressDialog dialog = new ProgressDialog(getActivity());
@@ -129,7 +144,7 @@ public class RegistrationDialogFragment extends DialogFragment  {
 	public void sendRegisterPost()  {
 		
 		RestJsonClient sendget = new RestJsonClient();
-		//JSONObject req = sendget.sendRegister(urlToRegister, register_email, register_password, register_first_name, register_last_name);
+		JSONObject req = sendget.(urlToRegister, register_email, register_password, register_first_name, register_last_name);
 		//req.toString();
 			
 	}	
