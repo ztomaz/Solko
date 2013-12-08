@@ -4,7 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class School {
-	int id;
+	public int id;
 	String name;
 	
 	public School(int id, String name)

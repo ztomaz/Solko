@@ -101,7 +101,7 @@ public class LoginFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				RegistrationDialogFragment rdf = new RegistrationDialogFragment();
-				rdf.show(getFragmentManager(), "bla");
+				rdf.show(getChildFragmentManager(), "bla");
 			}
 		});
 		

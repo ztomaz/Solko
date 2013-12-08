@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnCreateContextMenuListener;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -33,8 +34,6 @@ import android.widget.Spinner;
 
 public class RegistrationDialogFragment extends DialogFragment  {
  	
- 	
-
 	EditText emailAddresView;
 	EditText passwordView;
 	EditText firstNameView;
@@ -46,23 +45,31 @@ public class RegistrationDialogFragment extends DialogFragment  {
 
 	String URL = SolkoApplication.getDefaultURL();
 	
-	String urlToRegister = URL + "user/register";
+	String urlToRegister = URL + "login/register";
 	String url_get_school = URL + "school/get_school";
 	
 	Spinner spinner_schools;
     ArrayAdapter<School> school_adapter;
 	
+    String grade_number;
+    String grade_letter;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    }
+    
     @Override
  	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
  		getDialog().setTitle("Registration form");
  		View v = inflater.inflate(R.layout.register_form, container, false);
- 		
         //myDialog.setCancelable(false);
-        
-        Button login = (Button) v.findViewById(R.id.register_button);
+ 		Button login = (Button) v.findViewById(R.id.register_button);
 
         emailAddresView = (EditText) v.findViewById(R.id.EditUserName);
         passwordView = (EditText) v.findViewById(R.id.EditPassword);
+        firstNameView = (EditText) v.findViewById(R.id.FirstName);
+        lastNameView = (EditText) v.findViewById(R.id.LastName);
         
         spinner_schools = (Spinner) v.findViewById(R.id.spinner_schools);
         school_adapter = new ArrayAdapter<School> (getActivity(), android.R.layout.simple_spinner_item, new ArrayList<School>());
@@ -76,7 +83,7 @@ public class RegistrationDialogFragment extends DialogFragment  {
            public void onClick(View v)
            {
                    register();
-                   RegistrationDialogFragment.this.dismiss();
+                   //RegistrationDialogFragment.this.dismiss();
            }
        });
         
@@ -112,12 +119,12 @@ public boolean register(){
 		/*else if (!register_password.equals(passwordViewRe.getText().toString()))
 		{
 			passwordView.setError("passwords don't match");
-		}*/
+		}
 		else if (spinner_schools.getSelectedItemPosition()<1)
 		{
 			//school_adapter.setError("error");
 			//dataAdapter1.setError("please choose a country");
-		}
+		}*/
 		
 		else{
 			UserRegisterTask rTask = new UserRegisterTask();
@@ -184,13 +191,11 @@ public class getAllSchoolsTask extends AsyncTask<Void, Void, JSONArray> {
 }
 public class UserRegisterTask extends AsyncTask<Void, Void, Boolean> {
 
-	private final ProgressDialog dialog = new ProgressDialog(getActivity());
 	private boolean success;
 	
 	@Override
 	protected void onPreExecute(){
-		this.dialog.setMessage("Processing..."); 
-		this.dialog.show();
+		
 	}
 	
 	@Override
@@ -204,27 +209,23 @@ public class UserRegisterTask extends AsyncTask<Void, Void, Boolean> {
 		nameValuePairs.add(new BasicNameValuePair("first_name", register_first_name));
 		nameValuePairs.add(new BasicNameValuePair("last_name", register_last_name));
 		JSONObject selected_country;
-		/*try {
-			selected_country = new JSONObject(dataAdapter1.getItem(countrySpinner.getSelectedItemPosition()));
-			nameValuePairs.add(new BasicNameValuePair("country", selected_country.getString("code")));
-		} catch (JSONException e) {
-			
-		}*/
-		//nameValuePairs.add(new BasicNameValuePair("company_website", ""));
-		/*if (sex.getCheckedRadioButtonId() == R.id.sex_male)
-			nameValuePairs.add(new BasicNameValuePair("sex", "m"));
-		else if (sex.getCheckedRadioButtonId() == R.id.sex_female)
-			nameValuePairs.add(new BasicNameValuePair("sex", "f"));*/
-		nameValuePairs.add(new BasicNameValuePair("email", register_email));
 		
-		HttpResponse req = sendget.getResponse(urlToRegister);
+		int selected_school = school_adapter.getItem(spinner_schools.getSelectedItemPosition()).id;
+		nameValuePairs.add(new BasicNameValuePair("school_id", String.valueOf(selected_school)));
+		grade_number = "1";
+		grade_letter = "a";
+		nameValuePairs.add(new BasicNameValuePair("email", register_email));
+		nameValuePairs.add(new BasicNameValuePair("grade_number", grade_number));
+		nameValuePairs.add(new BasicNameValuePair("grade_letter", grade_letter.toLowerCase()));
+		
+		HttpResponse req = sendget.getResponseWithoutToken(urlToRegister, nameValuePairs);
 		return success;
 	}
 
 	@Override
 	protected void onPostExecute(final Boolean success) {
 		if (success) {
-			this.dialog.cancel();
+			
 		} else {
 			
 		}

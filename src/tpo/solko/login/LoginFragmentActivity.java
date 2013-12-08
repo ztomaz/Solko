@@ -36,7 +36,7 @@ public class LoginFragmentActivity extends FragmentActivity implements OnLoginLi
 	//private ArrayList <Group> groups;
 
 	static String URL = SolkoApplication.getDefaultURL();
-	String url_auth = URL + "/login/api-token-auth";
+	String url_auth = URL + "login/api-token-auth";
 	String token;
 	Fragment fragment;
 	private boolean automaticLogin;
