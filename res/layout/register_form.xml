@@ -1,143 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="10dp"
-    android:id="@+id/scrollView1"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:fillViewport="true" >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </LinearLayout>
+            <TextView
+                android:id="@+id/TextViewFirstName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="First name" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            <EditText
+                android:id="@+id/FirstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/TextViewLastName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last name" />
+
+            <EditText
+                android:id="@+id/LastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text" >
+
+            </EditText>
 
             <TextView
                 android:id="@+id/TextViewUserName"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:text="email" />
+                android:layout_height="wrap_content"
+                android:text="Email" />
 
             <EditText
                 android:id="@+id/EditUserName"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textEmailAddress"
-			 />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp" >
+                android:inputType="textEmailAddress" />
 
             <TextView
                 android:id="@+id/TextViewPassword"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:text="password" />
+                android:layout_height="wrap_content"
+                android:text="Password" />
 
             <EditText
                 android:id="@+id/EditPassword"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPassword"
-			/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp" >
+                android:inputType="textPassword" />
 
             <TextView
-                android:id="@+id/TextView01"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:text="retype_password" />
-
-            <EditText
-                android:id="@+id/EditText01"
+                android:id="@+id/tvRetype"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:text="Retype password" />
+
+            <EditText
+                android:id="@+id/EditPasswordRe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPassword"
-             />
+                android:inputType="textPassword" />
+
+            <TextView
+                android:id="@+id/sex"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="2"
+                android:gravity="left|center_horizontal|center_vertical"
+                android:paddingRight="10px"
+                android:text="Sex" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup1"
+                android:layout_width="fill_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content" >
+
+                <RadioButton
+                    android:id="@+id/sex_male"
+                    android:layout_width="fill_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Male" />
+
+                <RadioButton
+                    android:id="@+id/sex_female"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Female" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/countryTV"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="2"
+                android:gravity="left|center_horizontal|center_vertical"
+                android:paddingRight="10px"
+                android:text="School" />
+
+            <Spinner
+                android:id="@+id/spinner_schools"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Razred" />
+
+                <EditText
+                    android:id="@+id/editText1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10" >
+
+                    <requestFocus />
+                </EditText>
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Crka" />
+
+                <EditText
+                    android:id="@+id/editText2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:isScrollContainer="false"
+                android:orientation="vertical" >
+
+                <Button
+                    android:id="@+id/register_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Register" />
+            </LinearLayout>
+
         </LinearLayout>
+    </ScrollView>
 
-        <Spinner
-            android:id="@+id/spinner_schools"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <EditText
-                android:id="@+id/editText1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10" >
-
-                <requestFocus />
-            </EditText>
-
-            <EditText
-                android:id="@+id/editText2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-            
-            <Button
-                
-                android:id="@+id/register_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:text="register" />
-
-            <Button
-                android:id="@+id/go_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                
-                android:layout_marginLeft="10dp"
-
-                android:text="back" />
-        </LinearLayout>
-    </LinearLayout>
-
-</ScrollView>
-
+</LinearLayout>

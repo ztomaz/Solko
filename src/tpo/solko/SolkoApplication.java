@@ -10,11 +10,12 @@ public class SolkoApplication extends Application {
 	 * Default settings, token session, userId, etc.
 	 */
 	
-	public static String defaultURL = "http://127.0.0.1:8000/";
+	//public static String defaultURL = "http://127.0.0.1:8000/";
+	//public static String defaultURL = "http://192.168.1.103:8000/";
 	/*
 	 *  10.0.2.2 <- IP FOR CALLING LOCALHOST FROM VIRTUAL MACHINE
 	 */
-	
+	public static String defaultURL = "http://10.0.2.2:8000/";
 	
 	public static String getDefaultURL(){
 		return defaultURL;
