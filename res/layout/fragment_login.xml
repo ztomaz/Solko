@@ -1,0 +1,90 @@
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+   	xmlns:tools="http://schemas.android.com/tools"
+   	tools:context=".LoginFragmentActivity"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:layout_gravity="center">
+
+       <RelativeLayout
+           android:layout_width="266dp"
+           android:layout_height="wrap_content" 
+           android:background="@color/white"
+           android:padding="10dp"
+           android:layout_gravity="center">
+
+           <TextView
+               android:id="@+id/TextView01"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentLeft="true"
+               android:layout_alignParentRight="true"
+               android:layout_alignParentTop="true"
+               android:gravity="center"
+               android:text="LOGIN"
+               android:textSize="25sp" />
+
+           <EditText
+               android:id="@+id/user"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_alignParentLeft="true"
+               android:layout_below="@+id/TextView01"
+               android:ems="10"
+               android:hint="@string/prompt_email"
+               android:maxLines="1"
+               android:singleLine="true"
+               android:textColor="@color/black" />
+
+           <EditText
+               android:id="@+id/password"
+               android:layout_width="184dp"
+               android:layout_height="wrap_content"
+               android:layout_alignParentLeft="true"
+               android:layout_alignParentRight="true"
+               android:layout_below="@+id/user"
+               android:ems="10"
+               android:hint="@string/prompt_password"
+               android:imeActionId="@+id/login"
+               android:imeActionLabel="@string/action_sign_in_short"
+               android:imeOptions="actionUnspecified"
+               android:inputType="textPassword"
+               android:maxLines="1"
+               android:singleLine="true"
+               android:textColor="@color/black" >
+
+           </EditText>
+
+           <CheckBox
+               android:id="@+id/rememberMe"
+               android:layout_width="179dp"
+               android:layout_height="wrap_content"
+               android:layout_alignParentLeft="true"
+               android:layout_below="@+id/password"
+               android:text="@string/remember_me" />
+
+           <CheckBox
+               android:id="@+id/automaticLogin"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentLeft="true"
+               android:layout_below="@+id/rememberMe"
+               android:text="@string/automatic_login" />
+
+           <Button
+               android:id="@+id/sign_in_button"
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent"
+               android:layout_alignBottom="@+id/automaticLogin"
+               android:layout_alignParentRight="true"
+               android:layout_alignTop="@+id/rememberMe"
+               android:layout_toRightOf="@+id/rememberMe"
+               android:gravity="center_horizontal"
+               android:background="@drawable/button"
+               android:text="OK"
+               android:textColor="#FFFFFF"
+               android:textSize="17sp" />
+
+       </RelativeLayout>
+	</ScrollView>
