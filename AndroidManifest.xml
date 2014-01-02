@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="7"
         android:targetSdkVersion="18" />
 
     <uses-permission android:name="android.permission.INTERNET" >
@@ -15,10 +15,13 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:screenOrientation="portrait"
+        android:theme="@style/CustomTheme" >
         <activity
             android:name="tpo.solko.login.LoginFragmentActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,6 +35,22 @@
         <activity
             android:name="tpo.solko.main.MainFragmentActivity"
             android:label="@string/title_activity_main_fragment" >
+        </activity>
+        <activity
+            android:name="tpo.solko.main.SubjectActivity"
+            android:label="@string/title_activity_subject" >
+        </activity>
+        <activity
+            android:name="tpo.solko.subject.EditSubjectActivity"
+            android:label="@string/title_activity_edit_subject" >
+        </activity>
+        <activity
+            android:name="tpo.solko.obligation.EditObligationActivity"
+            android:label="@string/title_activity_edit_subject" >
+        </activity>
+        <activity
+            android:name="tpo.solko.main.HistoryFragmentActivity"
+            android:label="@string/title_activity_history" >
         </activity>
     </application>
 

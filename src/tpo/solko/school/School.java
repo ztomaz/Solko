@@ -1,4 +1,4 @@
-package tpo.solko.School;
+package tpo.solko.school;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -14,7 +14,7 @@ import org.json.JSONObject;
 import tpo.solko.R;
 import tpo.solko.RestJsonClient;
 import tpo.solko.SolkoApplication;
-import tpo.solko.School.School;
+import tpo.solko.school.School;
 
 
 
@@ -152,7 +152,7 @@ public class getAllSchoolsTask extends AsyncTask<Void, Void, JSONArray> {
 		json = null;
 		
 		
-		HttpResponse req = sendget.getResponse(url_get_school);//, token, jsonData)();
+		HttpResponse req = sendget.getResponseWithoutToken(url_get_school, null);//, token, jsonData)();
 		
 		if (req != null && req.getStatusLine().getStatusCode() == 200){
 			json = sendget.GetArrayFromResponse(req);

@@ -176,37 +176,6 @@ public class RestJsonClient {
 		    
 	}
 	
-	public HttpResponse getResponse(String url)
-	{
-		HttpClient httpClient = getNewHttpClient();
-		
-		HttpParams params = httpClient.getParams();
-		params.setParameter("http.protocol.handle-redirects",false);
-		HttpResponse response = null;
-		URI address = null;
-	
-		try {
-			address = new URI(url);
-		} catch (URISyntaxException e1) {
-			e1.printStackTrace();
-		}
-	
-		HttpGet httppost = new HttpGet(address);
-		httppost.setParams(params);
-		
-    	
-	    
-	    try {
-			response = httpClient.execute(httppost);
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-    	
-		return response;
-	}
-	
 	public HttpResponse getResponseWithoutToken(String url, List<NameValuePair> j)
 	{
 		HttpClient httpClient = getNewHttpClient();
@@ -226,13 +195,13 @@ public class RestJsonClient {
 		httppost.setParams(params);
 		
     	if (j!=null)
-    	{
-	    try {
-	    	httppost.setEntity(new UrlEncodedFormEntity(j));
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-    	}
+    		{
+		    try {
+		    	httppost.setEntity(new UrlEncodedFormEntity(j));
+			} catch (UnsupportedEncodingException e) {
+				
+			}
+    		}
 	    
 	    try {
 			response = httpClient.execute(httppost);

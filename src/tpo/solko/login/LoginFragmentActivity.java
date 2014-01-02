@@ -15,7 +15,6 @@ import tpo.solko.Interfaces.onFragmentChangeInterface;
 import tpo.solko.main.MainFragmentActivity;
 import tpo.solko.RestJsonClient;
 import tpo.solko.SolkoApplication;
-import tpo.solko.MainActivity;
 import tpo.solko.R;
 import android.accounts.AccountManager;
 import android.animation.Animator;
@@ -51,7 +50,7 @@ public class LoginFragmentActivity extends FragmentActivity implements OnLoginIn
 	ArrayList<Fragment> fragments;
 
 	String URL = SolkoApplication.getDefaultURL();
-	String url_auth = URL + "/mobile_login/";
+	String url_auth = URL + "login/api-token-auth/";
 	String token;
 	Fragment fragment;
 	private boolean automaticLogin;
@@ -78,6 +77,7 @@ public class LoginFragmentActivity extends FragmentActivity implements OnLoginIn
 
 	private TextView company;
     
+	int grade_id;
 	
 	@Override
 	public void attemptLogin(String mEmail, String mPassword, Boolean rememberU, Boolean rememberA)
@@ -219,12 +219,10 @@ public class LoginFragmentActivity extends FragmentActivity implements OnLoginIn
 						}
 						else
 						{
+
 							try{
-								JSONObject user = req.getJSONObject("user");
-								user_id = user.getInt("user_id");
 								token = req.getString("token");
-								group_id = user.getInt("group_id");
-								
+								grade_id = req.getInt("grade_id");
 								return status;
 								
 							} catch (JSONException e) {
@@ -267,17 +265,20 @@ public class LoginFragmentActivity extends FragmentActivity implements OnLoginIn
 	
 	public void continueToLists(){
 		
-		SharedPreferences userSettings = this.getSharedPreferences(mEmail, 0);
+		SharedPreferences userSettings = PreferenceManager.getDefaultSharedPreferences(context);
 		Editor uEditor = userSettings.edit();
 		
 		uEditor.putString("token", token);
-		
+		/*
+		 * SESSION INFORMATION
+		 */
 		uEditor.putInt("user_id", user_id);
+		uEditor.putInt("grade_id", grade_id);
+		
 		uEditor.commit();
 		introShared = this.getSharedPreferences("Login", 0);
 		
 		Editor loginEditor = introShared.edit();
-		loginEditor.putInt("user_id", user_id);
 		
 		loginEditor.putString("username", mEmail);
 		
@@ -331,7 +332,5 @@ public class LoginFragmentActivity extends FragmentActivity implements OnLoginIn
 			ft.replace(R.id.login_content, fragments.get(0), TAG_1).commit();
 		}
 	}
-	
-   
-	        
+	  
 }

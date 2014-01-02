@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+ 
+    <string-array name="Days">
+        <item>PON</item>
+        <item>TOR</item>
+        <item>SRE</item>
+        <item>CET</item>
+        <item>PET</item>
+        <item>SOB</item>
+        <item>NED</item>
+    </string-array>
+ 
+</resources>
