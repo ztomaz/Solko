@@ -16,6 +16,7 @@ import org.json.JSONObject;
 
 import tpo.solko.R;
 import tpo.solko.RestJsonClient;
+import tpo.solko.SolkoApplication;
 import tpo.solko.obligation.Obligation;
 import tpo.solko.obligation.ObligationAdapter;
 
@@ -26,6 +27,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +35,7 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class ObligationsByDayFragment extends Fragment {
@@ -48,31 +51,21 @@ public class ObligationsByDayFragment extends Fragment {
 	/*
 	 * View info
 	 */
-	private TextView current_date;
-	private TextView current_day;
-	private TextView number_of_tasks;
-	private TextView all_task_time;
-	private Button previous_day;
-	private Button next_day;
 
 	
 	/*
 	 * Other
 	 */
-	Context parent_context;
 	Context context;
 	
 	String token;
 	String current_date_string;
-	String url_get;static
+	String url_get;
 	String URL;
 
 	SharedPreferences login_shared;
 	SharedPreferences user_settings;
 
-	String mUsername;
-	
-	int group_id;
 	
 	public static SimpleDateFormat fmt;
 	//GetTaskByDay repeato;
@@ -90,27 +83,45 @@ public class ObligationsByDayFragment extends Fragment {
 	//RefreshFragment refresh_fragment;
 
 	TextView t;
-	
+	int grade_id;
+	Context parent_context;
 	Button change_fragment;
+	String url_get_obligations;
 	
-	public ObligationsByDayFragment g(GregorianCalendar this_date) {
+	public ObligationsByDayFragment g(Context context, GregorianCalendar this_date) {
 		the_date = this_date;
     	fmt = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+    	cta = new ObligationAdapter(context,android.R.layout.simple_list_item_checked);
+    	URL = SolkoApplication.getDefaultURL();
+		parent_context = context;
+    	url_get_obligations = "/obligations/get_obligations/";
+    	SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+		token = settings.getString("token", "");
+		grade_id = settings.getInt("grade_id", -1);
+
+		
     	return this;
 	}
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
-		//cta = new ObligationAdapter(context,android.R.layout.simple_list_item_checked);
-    	
+		
 		View view = inflater.inflate(R.layout.obligation_list, container, false);
+		
+		ListView obligations = (ListView)view.findViewById(R.id.obligation_list_view);
+		obligations.setAdapter(cta);
+		
 		t = (TextView) view.findViewById(R.id.date_name);
 		t.setText(the_date.getTime().toString());
 		context = getActivity();
+
+		GetObligationByDay gobd = new GetObligationByDay();
+		gobd.execute();
+		
 		return view;
 	}
 	
 	
-	private class GetObligationByDay extends AsyncTask<Void, Integer, JSONObject>
+	private class GetObligationByDay extends AsyncTask<Void, Integer, JSONArray>
 	{
 		
 		
@@ -119,7 +130,7 @@ public class ObligationsByDayFragment extends Fragment {
 		{
 		}
 		@Override
-		protected JSONObject doInBackground(Void... params) {
+		protected JSONArray doInBackground(Void... params) {
 			RestJsonClient rjc = new RestJsonClient();
     		JSONObject jsonValues = new JSONObject();
     		try {
@@ -130,8 +141,8 @@ public class ObligationsByDayFragment extends Fragment {
     			e.printStackTrace();
     		}
     		
-    		HttpResponse hr = rjc.postTokenAndJsonObject(URL + "/" + String.valueOf(group_id) + url_get, token, jsonValues);
-    		JSONObject js = rjc.GetObjectFromResponse(hr);
+    		HttpResponse hr = rjc.postTokenAndJsonObject(URL + String.valueOf(grade_id) + url_get_obligations, token, jsonValues);
+    		JSONArray js = rjc.GetArrayFromResponse(hr);
     		return js;
 			
 		}
@@ -141,43 +152,25 @@ public class ObligationsByDayFragment extends Fragment {
 			
         }  
         @Override  
-        protected void onPostExecute(JSONObject result)  
+        protected void onPostExecute(JSONArray result)  
         {   
 			cta.clear();
 			Synched = true;
     		
 			try {
-        		if (result != null && result.has("entries"))
-        		{
-        			JSONArray cal_array = result.getJSONArray("entries");
         		
-					JSONObject current_object;
-					CalTime ct;
-					for (int i = 0; i < cal_array.length(); i++)
-					{
-						current_object = cal_array.getJSONObject(i);
-						ct = new CalTime(current_object, theDate);
-						cta.add(ct);
-					}
-					try
-					{
-						detail_fragment = new DetailFragment().newInstance(cta);
-						
-						getChildFragmentManager().beginTransaction().replace(R.id.fragment_container, detail_fragment).commit();
-						current_fragment = detail_fragment;
-					}catch(IllegalStateException e)
-					{
-						
-					}
+				JSONObject current_object;
+				Obligation o;
+				for (int i = 0; i < result.length(); i++)
+				{
+					current_object = result.getJSONObject(i);
+					o = new Obligation(current_object);
+					cta.add(o);
 				}
-        		else
-        		{
-        			
-        			getChildFragmentManager().beginTransaction().replace(R.id.fragment_container, refresh_fragment).commit();
-        			current_fragment = refresh_fragment;
-        		}
+				
+       
+				cta.notifyDataSetChanged();
         		
-        		set_texts();
         		
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -186,17 +179,8 @@ public class ObligationsByDayFragment extends Fragment {
         }  
         
 	}
-*/
-	public void updateUI(GregorianCalendar day) {
-		the_date = day;
-		
-	
-	}
 
-	public ObligationsByDayFragment newInstance(GregorianCalendar g) {
-		the_date = g;
-		return this;
-	}
+	
 	
 	
 }

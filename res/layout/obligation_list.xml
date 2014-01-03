@@ -16,4 +16,13 @@
         android:layout_alignParentTop="true"
         android:text="TextView" />
 
+    <ListView
+        android:id="@+id/obligation_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/date_name"
+        android:layout_below="@+id/date_name" >
+
+    </ListView>
+
 </RelativeLayout>

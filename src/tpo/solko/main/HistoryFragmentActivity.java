@@ -104,7 +104,7 @@ public class HistoryFragmentActivity
 		});
         
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.main_fragment, new ObligationsByDayFragment().newInstance(today), "FRAGMENT_1");
+        ft.add(R.id.main_fragment, new ObligationsByDayFragment().g(getApplicationContext(), today), "FRAGMENT_1");
         ft.commit();
         
         
@@ -118,7 +118,7 @@ public class HistoryFragmentActivity
     	today.add(Calendar.DAY_OF_YEAR, i);
         dateName.setText(sdf.format(today.getTime()).toString());
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.main_fragment, new ObligationsByDayFragment().newInstance(today), "FRAGMENT_1");
+        ft.replace(R.id.main_fragment, new ObligationsByDayFragment().g(getApplicationContext(), today), "FRAGMENT_1");
         ft.commit();
         
     }

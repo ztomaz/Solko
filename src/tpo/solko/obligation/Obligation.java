@@ -42,11 +42,11 @@ public class Obligation {
 	{
 		if (json.has("obligation_name"))
 		{
-			this.name = json.getString("subject_name");
+			this.name = json.getString("obligation_name");
 		}
 		if (json.has("obligation_id"))
 		{
-			this.id = json.getInt("subject_id");
+			this.id = json.getInt("obligation_id");
 		}
 		
 		this.scores = new ArrayList<Score>();
