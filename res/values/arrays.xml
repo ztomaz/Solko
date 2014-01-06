@@ -17,5 +17,11 @@
         <item>Ustno sprasevanje</item>
         <item>Drugo</item>
     </string-array>
+    
+    <string-array name="Grade">
+        <item>Označi kod opravljenjo</item>
+        <item>Označi kod opravljeno in oceni</item>
+        <item>Označi kod neopravljeno</item>
+    </string-array>
  
 </resources>

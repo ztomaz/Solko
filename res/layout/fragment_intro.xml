@@ -32,6 +32,6 @@
         android:layout_marginBottom="90dp"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:src="@drawable/button" />
+        android:src="@drawable/button2" />
 
 </RelativeLayout>

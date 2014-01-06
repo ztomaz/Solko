@@ -17,6 +17,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginBottom="10dp"
         android:ems="10"
+        android:padding="10dp"
+        android:background="@drawable/abc_textfield_searchview_holo_light"
         android:hint="Ime obveznosti: " >
 
         <requestFocus />
@@ -26,6 +28,7 @@
         android:id="@+id/obligation_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:layout_alignRight="@+id/obligation_name_et"
         android:layout_below="@+id/obligation_name_et"
         android:layout_toRightOf="@+id/textView2"
@@ -36,11 +39,11 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:layout_alignBaseline="@+id/obligation_date"
         android:layout_alignBottom="@+id/obligation_date"
         android:layout_alignLeft="@+id/obligation_name_et"
         android:gravity="center"
-        android:padding="10dp"
         android:text="Datum obveznosti: " />
 
 	<TextView
@@ -48,6 +51,7 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_alignLeft="@+id/textView3"
+	    android:layout_alignRight="@+id/textView3"
 	    android:layout_below="@+id/textView3"
 	    android:gravity="center"
 	    android:padding="10dp"
@@ -55,49 +59,58 @@
 
     <TextView
         android:id="@+id/textView3"
+        android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/spinner1"
         android:layout_alignLeft="@+id/textView2"
         android:layout_below="@+id/textView2"
         android:gravity="center"
-        android:padding="10dp"
         android:text="Tip obveznosti: " />
 
     <Spinner
         android:id="@+id/spinner1"
+        android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/predmetovje"
+        android:background="@drawable/abc_spinner_ab_holo_light"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/textView2" />
 
     <EditText
         android:id="@+id/editText1"
+        android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/checkBox1"
-        android:layout_alignRight="@+id/spinner1"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/checkBox1"
+        android:background="@drawable/abc_textfield_searchview_holo_light"
         android:ems="10"
-        android:hint="Description"
+        android:hint="Opis"
         android:lines="3" />
 
     <Spinner
         android:id="@+id/predmetovje"
+        android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/obligation_date"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/abc_spinner_ab_holo_light"
         android:layout_alignTop="@+id/textView4"
         android:layout_toRightOf="@+id/textView3" />
 
     <CheckBox
         android:id="@+id/checkBox1"
         android:layout_width="wrap_content"
+        android:padding="10dp"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView4"
         android:layout_alignRight="@+id/predmetovje"
         android:layout_below="@+id/predmetovje"
-        android:text="Personal" />
+        android:text="Osebna obveznost" />
 
     
 

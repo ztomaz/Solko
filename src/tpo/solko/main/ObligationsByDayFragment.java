@@ -14,6 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import tpo.solko.Interfaces.onRefreshInterface;
 import tpo.solko.R;
 import tpo.solko.RestJsonClient;
 import tpo.solko.SolkoApplication;
@@ -47,7 +48,8 @@ import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class ObligationsByDayFragment extends Fragment {
+public class ObligationsByDayFragment extends Fragment
+	{
 	
 	/*
 	 * Current day
@@ -211,6 +213,9 @@ public class ObligationsByDayFragment extends Fragment {
         }  
         
 	}
+
+
+
 
 	
 	

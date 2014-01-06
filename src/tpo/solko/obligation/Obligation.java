@@ -21,7 +21,7 @@ public class Obligation {
 	boolean personal;
 	boolean is_score_obligated;
 	
-	ArrayList<Score> scores;
+	//ArrayList<Score> scores;
 
 	int subject_id;
 	
@@ -54,7 +54,7 @@ public class Obligation {
 		{
 			this.description = json.getString("description");
 		}
-		this.scores = new ArrayList<Score>();
+		/*this.scores = new ArrayList<Score>();
 		if (json.has("scores"))
 		{
 			JSONArray time = json.getJSONArray("scores");
@@ -64,7 +64,7 @@ public class Obligation {
 				Score t = new Score(jo);
 				this.scores.add(t);
 			}
-		}
+		}*/
 		
 		if (json.has("personal"))
 		{
@@ -90,6 +90,16 @@ public class Obligation {
 		{
 			this.type = json.getString("type");
 		}
+		if (json.has("description"))
+		{
+			this.description = json.getString("description");
+		}
+		if (json.has("score"))
+		{
+			JSONObject sub_json = json.getJSONObject("score");
+			this.score = new Score(sub_json);
+		}
+		
 	}
 	
 
@@ -115,6 +125,7 @@ public class Obligation {
 			{
 				jsonValues.put("obligation_name", "");
 			}
+			/*
 			if (this.scores != null)
 			{
 				JSONArray ja = new JSONArray();
@@ -123,7 +134,7 @@ public class Obligation {
 					ja.put(s.toJSON());
 				}
 				jsonValues.put("scores", ja);
-			}
+			}*/
 			jsonValues.put("subject_id", subject_id);
 			jsonValues.put("personal", personal);
 			jsonValues.put("is_score_necessary", is_score_obligated);
@@ -137,6 +148,21 @@ public class Obligation {
 			{
     			jsonValues.put("date", date_to_jsonArray(date, false));
 			}
+			if (this.description != null)
+			{
+				jsonValues.put("description", this.description);
+			}
+			else
+			{
+				jsonValues.put("description", "");
+			}
+			if (this.score != null)
+			{
+				
+				//JSONObject sub_json = new JSONObject();
+				jsonValues.put("score", score.toJSON());
+			}
+			
 		}
 		catch (JSONException e)
 		{

@@ -3,6 +3,7 @@
        android:id="@+id/scrollView1"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
+       android:padding="20dp"
 	   android:minWidth="300dp">
 
        <LinearLayout
@@ -14,12 +15,13 @@
                android:id="@+id/TextViewFirstName"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:text="First name" />
+               android:text="Ime" />
 
            <EditText
                android:id="@+id/FirstName"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
+        	android:background="@drawable/abc_textfield_searchview_holo_light"
                android:ems="10"
                android:inputType="text" />
 
@@ -27,11 +29,12 @@
                android:id="@+id/TextViewLastName"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:text="Last name" />
+               android:text="Priimek" />
 
            <EditText
                android:id="@+id/LastName"
                android:layout_width="match_parent"
+        		android:background="@drawable/abc_textfield_searchview_holo_light"
                android:layout_height="wrap_content"
                android:ems="10"
                android:inputType="text" >
@@ -48,6 +51,7 @@
                android:id="@+id/EditUserName"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
+        android:background="@drawable/abc_textfield_searchview_holo_light"
                android:ems="10"
                android:inputType="textEmailAddress" />
 
@@ -55,11 +59,12 @@
                android:id="@+id/TextViewPassword"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:text="Password" />
+               android:text="Geslo" />
 
            <EditText
                android:id="@+id/EditPassword"
                android:layout_width="match_parent"
+        android:background="@drawable/abc_textfield_searchview_holo_light"
                android:layout_height="wrap_content"
                android:ems="10"
                android:inputType="textPassword" />
@@ -68,12 +73,13 @@
                android:id="@+id/tvRetype"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:text="Retype password" />
+               android:text="Ponovi geslo" />
 
            <EditText
                android:id="@+id/EditPasswordRe"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
+        android:background="@drawable/abc_textfield_searchview_holo_light"
                android:ems="10"
                android:inputType="textPassword" />
 
@@ -85,11 +91,12 @@
                android:layout_weight="2"
                android:gravity="left|center_horizontal|center_vertical"
                android:paddingRight="10px"
-               android:text="School" />
+               android:text="Šola" />
 
            <Spinner
                android:id="@+id/spinner_schools"
                android:layout_width="fill_parent"
+        android:background="@drawable/abc_spinner_ab_holo_light"
                android:layout_height="wrap_content" />
 
            <LinearLayout
@@ -107,6 +114,7 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
+        android:background="@drawable/abc_textfield_searchview_holo_light"
                    android:ems="1"
                    android:inputType="number"
                    android:maxLines="1"
@@ -126,6 +134,7 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
+        android:background="@drawable/abc_textfield_searchview_holo_light"
                    android:ems="1"
                    android:maxLines="1"
                    android:maxLength="1"
@@ -143,7 +152,8 @@
                <Button
                    android:id="@+id/register_button"
                    android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
+                   android:layout_height="60dp"
+                   android:background="@drawable/button2"
                    android:text="Register" />
            </LinearLayout>
 

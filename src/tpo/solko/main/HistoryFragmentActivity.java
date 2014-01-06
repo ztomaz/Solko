@@ -6,6 +6,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 
+import tpo.solko.Interfaces.onRefreshInterface;
 import tpo.solko.R;
 import tpo.solko.SolkoApplication;
 import tpo.solko.obligation.EditObligationActivity;
@@ -32,7 +33,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 public class HistoryFragmentActivity 
-				extends ActionBarActivity {
+				extends ActionBarActivity 
+				implements onRefreshInterface{
 	
 	public ViewPager _mViewPager;
 	public String token;
@@ -140,10 +142,10 @@ public class HistoryFragmentActivity
 		
         
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.main_fragment, new ObligationsByDayFragment().g(getApplicationContext(), today), "FRAGMENT_1");
+        ft.add(R.id.main_fragment, new ObligationsByDayFragment().g(this, today), "FRAGMENT_1");
         ft.commit();
         
-        
+        setupActionBar();
         change_date(0);
     }
     
@@ -154,7 +156,7 @@ public class HistoryFragmentActivity
     	today.add(Calendar.DAY_OF_YEAR, i);
         dateName.setText(sdf.format(today.getTime()).toString());
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.main_fragment, new ObligationsByDayFragment().g(getApplicationContext(), today), "FRAGMENT_1");
+        ft.replace(R.id.main_fragment, new ObligationsByDayFragment().g(this, today), "FRAGMENT_1");
         ft.commit();
         
     }
@@ -164,7 +166,7 @@ public class HistoryFragmentActivity
     	today = i;
         dateName.setText(sdf.format(today.getTime()).toString());
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.main_fragment, new ObligationsByDayFragment().g(getApplicationContext(), today), "FRAGMENT_1");
+        ft.replace(R.id.main_fragment, new ObligationsByDayFragment().g(this, today), "FRAGMENT_1");
         ft.commit();
         
     }
@@ -177,7 +179,7 @@ public class HistoryFragmentActivity
    
     private void setupActionBar() {
 		
-		getSupportActionBar().setTitle("HISTORY");
+		getSupportActionBar().setTitle("OBVEZNIK");
     	getSupportActionBar().setHomeButtonEnabled(true);
     	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     	
@@ -198,7 +200,7 @@ public class HistoryFragmentActivity
 	    super.onPostResume();
 	    if (mReturningWithResult) {
 	    	FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-	        ft.replace(R.id.main_fragment, new ObligationsByDayFragment().g(getApplicationContext(), today), "FRAGMENT_1");
+	        ft.replace(R.id.main_fragment, new ObligationsByDayFragment().g(this, today), "FRAGMENT_1");
 	        ft.commit();
 	    }
 	
@@ -221,12 +223,21 @@ public class HistoryFragmentActivity
 			return true;
 	
 		case R.id.action_add_new_subject:
-			Intent intent = new Intent(getApplicationContext(), EditObligationActivity.class);
+			Intent intent = new Intent(this, EditObligationActivity.class);
 			startActivityForResult(intent, 200);
 			return true;
 		}
 			
 		return super.onOptionsItemSelected(item);
+	}
+
+
+	@Override
+	public void onRefresh() {
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.main_fragment, new ObligationsByDayFragment().g(this, today), "FRAGMENT_1");
+        ft.commit();
+		
 	}
     
 }

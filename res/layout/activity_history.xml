@@ -10,22 +10,28 @@
         <Button
             android:id="@+id/prev_month"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Prev" />
+            android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/date_name"
+            android:background="@drawable/button2"
+            android:text="Prejšni" />
 
         <Button
             android:id="@+id/next_month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/date_name"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:text="Next" />
+            android:layout_toRightOf="@+id/date_name"
+            android:background="@drawable/button2"
+            android:text="Naslednji" />
 
         <TextView
             android:id="@+id/date_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/prev_month"
+            android:layout_above="@+id/main_fragment"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:gravity="center"

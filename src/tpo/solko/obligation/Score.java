@@ -12,6 +12,7 @@ public class Score {
 	public int id;
 	public int score;
 	public int user_id;
+	public int completed;
 	
 	public Score(int id)
 	{
@@ -33,6 +34,10 @@ public class Score {
 		{
 			this.user_id = json.getInt("user_id");
 		}
+		if (json.has("completed"))
+		{
+			this.completed = json.getInt("completed");
+		}
 	}
 	
 	public String toString()
@@ -51,10 +56,9 @@ public class Score {
 			
     		jsonValues.put("user_id", this.user_id);
 			
-    		if (score != 0)
-    		{
-    			jsonValues.put("score", this.score);
-    		}
+    		jsonValues.put("score", this.score);
+    		
+    		jsonValues.put("completed", completed);
 
 			
 		}

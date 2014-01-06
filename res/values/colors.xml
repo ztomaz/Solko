@@ -7,8 +7,10 @@
     <color name="holo_blue_light">#ff33b5ef</color>
     
     <color name="holo_blue_dark">#ff0099cc</color>
-    <color name="red_stopped">#CC0000</color>
-    <color name="green_working">#99CC00</color>
+    <color name="red_not_highlighted">#FF4444</color>
+    <color name="red">#CC0000</color>
+    <color name="green_not_highlighted">#99CC00</color>
+    <color name="green">#669900</color>
     <color name="dark_grey">#E6E6E6</color>
     <color name="very_dark_grey">#646464</color>
 </resources>

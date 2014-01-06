@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
+    android:id="@+id/layout_id"
     android:layout_height="wrap_content"
     android:padding="10dp"
     android:background="@drawable/listview"
@@ -30,7 +31,7 @@
         android:layout_gravity="center"
         android:layout_weight="1.3"
         android:layout_height="48dp"
-        android:background="@drawable/button"
+        android:background="@color/transparent"
         android:src="@drawable/abc_ic_menu_moreoverflow_normal_holo_light" />
 
 </LinearLayout>
