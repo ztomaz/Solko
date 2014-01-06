@@ -57,7 +57,7 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
         LayoutInflater vi;
         vi = LayoutInflater.from(getContext());
         v = vi.inflate(textViewResourceId, null);
-        if (textViewResourceId == android.R.layout.simple_dropdown_item_1line)
+        if (textViewResourceId == android.R.layout.simple_spinner_item)
         {
         	return super.getView(position, convertView, parent);
         }

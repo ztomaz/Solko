@@ -23,7 +23,7 @@
     </EditText>
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/obligation_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/obligation_name_et"
@@ -36,8 +36,8 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView1"
-        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignBaseline="@+id/obligation_date"
+        android:layout_alignBottom="@+id/obligation_date"
         android:layout_alignLeft="@+id/obligation_name_et"
         android:gravity="center"
         android:padding="10dp"
@@ -86,6 +86,7 @@
         android:id="@+id/predmetovje"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/obligation_date"
         android:layout_alignTop="@+id/textView4"
         android:layout_toRightOf="@+id/textView3" />
 
@@ -96,7 +97,6 @@
         android:layout_alignLeft="@+id/textView4"
         android:layout_alignRight="@+id/predmetovje"
         android:layout_below="@+id/predmetovje"
-        android:padding="10dp"
         android:text="Personal" />
 
     

@@ -17,22 +17,31 @@ import org.json.JSONObject;
 import tpo.solko.R;
 import tpo.solko.RestJsonClient;
 import tpo.solko.SolkoApplication;
+import tpo.solko.obligation.EditObligationActivity;
 import tpo.solko.obligation.Obligation;
 import tpo.solko.obligation.ObligationAdapter;
+import tpo.solko.subject.EditSubjectActivity;
+import tpo.solko.subject.Subject;
 
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.DialogInterface.OnCancelListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
@@ -88,6 +97,8 @@ public class ObligationsByDayFragment extends Fragment {
 	Button change_fragment;
 	String url_get_obligations;
 	
+	Obligation obligation_to_remove;
+	
 	public ObligationsByDayFragment g(Context context, GregorianCalendar this_date) {
 		the_date = this_date;
     	fmt = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
@@ -109,17 +120,38 @@ public class ObligationsByDayFragment extends Fragment {
 		
 		ListView obligations = (ListView)view.findViewById(R.id.obligation_list_view);
 		obligations.setAdapter(cta);
-		
+		SimpleDateFormat outFormat = new SimpleDateFormat("EEEE", Locale.getDefault());
 		t = (TextView) view.findViewById(R.id.date_name);
-		t.setText(the_date.getTime().toString());
+		t.setText(outFormat.format(the_date.getTime()).toString().toUpperCase(Locale.getDefault()));
 		context = getActivity();
 
 		GetObligationByDay gobd = new GetObligationByDay();
 		gobd.execute();
 		
+		obligations.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				obligation_to_remove = cta.getItem(position);
+				Intent intent = new Intent(parent_context, EditObligationActivity.class);
+				intent.putExtra("obligation", obligation_to_remove.toJSON().toString());
+				startActivityForResult(intent, 300);
+				
+			}
+		});
+		
 		return view;
 	}
 	
+	
+
+	public void remove_and_add(Obligation o)
+	{
+		
+	}
+    	
+    
 	
 	private class GetObligationByDay extends AsyncTask<Void, Integer, JSONArray>
 	{

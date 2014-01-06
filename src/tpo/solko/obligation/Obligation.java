@@ -27,6 +27,8 @@ public class Obligation {
 	
 	GregorianCalendar date;
 	
+	String description;
+	
 	public Obligation(int id)
 	{
 		this.id = id;
@@ -48,11 +50,14 @@ public class Obligation {
 		{
 			this.id = json.getInt("obligation_id");
 		}
-		
+		if (json.has("description"))
+		{
+			this.description = json.getString("description");
+		}
 		this.scores = new ArrayList<Score>();
 		if (json.has("scores"))
 		{
-			JSONArray time = json.getJSONArray("times");
+			JSONArray time = json.getJSONArray("scores");
 			for (int i = 0; i<time.length(); i++)
 			{
 				JSONObject jo = time.getJSONObject(i);
@@ -81,6 +86,10 @@ public class Obligation {
 			int day = (Integer) json_start_date.get(2);
 			this.date = new GregorianCalendar(year, month, day, 0, 0);
 		}		
+		if (json.has("type"))
+		{
+			this.type = json.getString("type");
+		}
 	}
 	
 
@@ -118,7 +127,12 @@ public class Obligation {
 			jsonValues.put("subject_id", subject_id);
 			jsonValues.put("personal", personal);
 			jsonValues.put("is_score_necessary", is_score_obligated);
-			jsonValues.put("type", "OTHER");
+			if (type == null)
+				jsonValues.put("type", "Drugo");
+			else
+				jsonValues.put("type", type);
+			if (description != null)
+				jsonValues.put("description", description);
 			if (this.date != null)
 			{
     			jsonValues.put("date", date_to_jsonArray(date, false));

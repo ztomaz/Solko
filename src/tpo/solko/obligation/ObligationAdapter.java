@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class ObligationAdapter extends ArrayAdapter<Obligation> {
@@ -59,12 +60,13 @@ public class ObligationAdapter extends ArrayAdapter<Obligation> {
         holder = new ObjectHolder();
         holder.obligation = getItem(position);
         holder.name = (TextView)v.findViewById(R.id.subject_text);
-        holder.grade_me = (Button) v.findViewById(R.id.oceni_obveznost);
+        holder.type = (TextView)v.findViewById(R.id.obligation_type);
+        holder.grade_me = (ImageButton) v.findViewById(R.id.oceni_obveznost);
         holder.grade_me.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				oceni_me(v);
+				//oceni_me(v);
 				
 			}
 		});
@@ -79,16 +81,14 @@ public class ObligationAdapter extends ArrayAdapter<Obligation> {
 
 	private void setupItem(ObjectHolder holder) {
 		holder.name.setText(holder.obligation.toString());
-		if (holder.obligation.score==null)
-			holder.grade_me.setVisibility(View.INVISIBLE);
-		else
-			holder.grade_me.setVisibility(View.VISIBLE);
+		holder.type.setText(holder.obligation.type);
 	}
 
 	public static class ObjectHolder {
 		Obligation obligation;
 		TextView name;
-		Button grade_me;
+		TextView type;
+		ImageButton grade_me;
 		
 	}
 	
