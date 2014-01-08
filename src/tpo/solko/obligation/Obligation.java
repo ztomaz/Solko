@@ -13,7 +13,7 @@ import org.json.JSONObject;
 
 public class Obligation {
 	public int id;
-	
+	String subject;
 	String name;
 	Score score;
 	String type;
@@ -53,6 +53,10 @@ public class Obligation {
 		if (json.has("description"))
 		{
 			this.description = json.getString("description");
+		}
+		if (json.has("subject"))
+		{
+			this.subject = json.getString("subject");
 		}
 		/*this.scores = new ArrayList<Score>();
 		if (json.has("scores"))
@@ -125,6 +129,7 @@ public class Obligation {
 			{
 				jsonValues.put("obligation_name", "");
 			}
+			
 			/*
 			if (this.scores != null)
 			{
@@ -136,6 +141,7 @@ public class Obligation {
 				jsonValues.put("scores", ja);
 			}*/
 			jsonValues.put("subject_id", subject_id);
+			jsonValues.put("subject", subject);
 			jsonValues.put("personal", personal);
 			jsonValues.put("is_score_necessary", is_score_obligated);
 			if (type == null)

@@ -10,6 +10,7 @@ import java.util.Locale;
 
 
 import org.apache.http.HttpResponse;
+import org.holoeverywhere.app.Activity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -101,7 +102,7 @@ public class ObligationsByDayFragment extends Fragment
 	
 	Obligation obligation_to_remove;
 	
-	public ObligationsByDayFragment g(Context context, GregorianCalendar this_date) {
+	public ObligationsByDayFragment g(Activity context, GregorianCalendar this_date) {
 		the_date = this_date;
     	fmt = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
     	cta = new ObligationAdapter(context,android.R.layout.simple_list_item_checked);

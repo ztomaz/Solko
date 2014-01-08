@@ -1,4 +1,4 @@
-package tpo.solko.subject;
+package tpo.solko.obligation;
 
 import org.apache.http.HttpResponse;
 import org.holoeverywhere.LayoutInflater;
@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import tpo.solko.R;
 import tpo.solko.RestJsonClient;
 import tpo.solko.SolkoApplication;
+import tpo.solko.subject.Subject;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
@@ -21,7 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class SubjectAdapter extends ArrayAdapter<Subject> {
+public class StatisticsAdapter extends ArrayAdapter<Subject> {
 
 	String token;
 	String URL;
@@ -36,7 +37,7 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
 	
 	
 	
-	public SubjectAdapter(Context context, int textViewResourceId) {
+	public StatisticsAdapter(Context context, int textViewResourceId) {
 	    super(context, textViewResourceId);
 	    
 	    SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
@@ -66,16 +67,7 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
         holder = new SubjectHolder();
         holder.subject = getItem(position);
         holder.name = (TextView)v.findViewById(R.id.subject_text);
-        holder.enroll_me = (Button) v.findViewById(R.id.enroll_me);
-        holder.enroll_me.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				enrollMe(v);
-				
-			}
-		});
-        holder.enroll_me.setTag(holder.subject);
+        holder.avg = (TextView)v.findViewById(R.id.average);
         
         v.setTag(holder);
         setupItem(holder);
@@ -86,13 +78,14 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
 
 	private void setupItem(SubjectHolder holder) {
 		holder.name.setText(holder.subject.toString());
-		if (holder.subject.enrolled)
-			holder.enroll_me.setVisibility(View.INVISIBLE);
+		holder.avg.setText(holder.subject.getPersonalAvg());
+		
 	}
 
 	public static class SubjectHolder {
 		Subject subject;
 		TextView name;
+		TextView avg;
 		Button enroll_me;
 		
 	}

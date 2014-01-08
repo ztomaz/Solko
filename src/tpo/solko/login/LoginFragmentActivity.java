@@ -4,6 +4,10 @@ package tpo.solko.login;
 import java.util.ArrayList;
 
 import org.apache.http.HttpResponse;
+import org.holoeverywhere.app.Activity;
+import org.holoeverywhere.app.Fragment;
+import org.holoeverywhere.preference.PreferenceManager;
+import org.holoeverywhere.widget.FrameLayout;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,17 +33,13 @@ import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.Window;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
-public class LoginFragmentActivity extends FragmentActivity implements OnLoginInterface, onFragmentChangeInterface{
+public class LoginFragmentActivity extends Activity implements OnLoginInterface, onFragmentChangeInterface{
 	private UserLoginTask mAuthTask = null;
 	
 	private String mEmail;

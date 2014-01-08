@@ -93,7 +93,7 @@
                android:paddingRight="10px"
                android:text="Šola" />
 
-           <Spinner
+           <org.holoeverywhere.widget.Spinner
                android:id="@+id/spinner_schools"
                android:layout_width="fill_parent"
         android:background="@drawable/abc_spinner_ab_holo_light"
@@ -150,6 +150,7 @@
                android:orientation="vertical" >
 
                <Button
+                   android:layout_marginTop="10dp"
                    android:id="@+id/register_button"
                    android:layout_width="match_parent"
                    android:layout_height="60dp"

@@ -39,11 +39,9 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
         android:layout_alignBaseline="@+id/obligation_date"
         android:layout_alignBottom="@+id/obligation_date"
         android:layout_alignLeft="@+id/obligation_name_et"
-        android:gravity="center"
         android:text="Datum obveznosti: " />
 
 	<TextView
@@ -53,30 +51,27 @@
 	    android:layout_alignLeft="@+id/textView3"
 	    android:layout_alignRight="@+id/textView3"
 	    android:layout_below="@+id/textView3"
-	    android:gravity="center"
-	    android:padding="10dp"
 	    android:text="Predmet: " />
 
     <TextView
         android:id="@+id/textView3"
-        android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/spinner1"
         android:layout_alignLeft="@+id/textView2"
         android:layout_below="@+id/textView2"
-        android:gravity="center"
+        android:layout_marginBottom="10dp"
         android:text="Tip obveznosti: " />
 
-    <Spinner
+    <org.holoeverywhere.widget.Spinner
         android:id="@+id/spinner1"
-        android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/predmetovje"
-        android:background="@drawable/abc_spinner_ab_holo_light"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView2" />
+        android:layout_below="@+id/textView2"
+        android:background="@drawable/abc_spinner_ab_holo_light"
+        android:padding="10dp" />
 
     <EditText
         android:id="@+id/editText1"
@@ -91,17 +86,17 @@
         android:hint="Opis"
         android:lines="3" />
 
-    <Spinner
+    <org.holoeverywhere.widget.Spinner
         android:id="@+id/predmetovje"
-        android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:background="@drawable/abc_spinner_ab_holo_light"
         android:layout_alignTop="@+id/textView4"
-        android:layout_toRightOf="@+id/textView3" />
+        android:layout_toRightOf="@+id/textView4"
+        android:background="@drawable/abc_spinner_ab_holo_light"
+        android:padding="10dp" />
 
-    <CheckBox
+    <org.holoeverywhere.widget.CheckBox
         android:id="@+id/checkBox1"
         android:layout_width="wrap_content"
         android:padding="10dp"
@@ -112,6 +107,13 @@
         android:layout_below="@+id/predmetovje"
         android:text="Osebna obveznost" />
 
-    
+    <TextView
+        android:id="@+id/ocena"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

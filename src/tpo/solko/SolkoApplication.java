@@ -1,6 +1,7 @@
 package tpo.solko;
 
-import android.app.Application;
+import org.holoeverywhere.app.Application;
+
 import android.content.Context;
 import android.widget.Toast;
 

@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <org.holoeverywhere.widget.NumberPicker
+        android:id="@+id/numberPicker1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/numberPicker1"
+        android:orientation="horizontal" >
+
+        <org.holoeverywhere.widget.Button
+           
+            android:id="@+id/button2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel" />
+
+        <org.holoeverywhere.widget.Button
+            android:id="@+id/button1"
+            android:layout_width="159dp"
+            android:layout_height="wrap_content"
+            android:text="Shrani" />
+    </LinearLayout>
+
+</RelativeLayout>

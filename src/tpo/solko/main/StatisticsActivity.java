@@ -1,7 +1,13 @@
 package tpo.solko.main;
 
+import java.util.zip.Inflater;
+
 import org.apache.http.HttpResponse;
+import org.holoeverywhere.LayoutInflater;
 import org.holoeverywhere.app.Activity;
+import org.holoeverywhere.app.AlertDialog;
+import org.holoeverywhere.widget.LinearLayout;
+import org.holoeverywhere.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,11 +17,12 @@ import tpo.solko.RestJsonClient;
 import tpo.solko.SolkoApplication;
 import tpo.solko.subject.EditSubjectActivity;
 import tpo.solko.subject.Subject;
-import tpo.solko.subject.SubjectAdapter;
+import tpo.solko.obligation.StatisticsAdapter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -28,12 +35,13 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.HeaderViewListAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 
-public class SubjectActivity extends Activity {
+public class StatisticsActivity extends Activity {
 
 	ListView listView;
-	SubjectAdapter adapter;
+	StatisticsAdapter adapter;
 	
 	String URL;
 	String url_get_subjects;
@@ -41,7 +49,7 @@ public class SubjectActivity extends Activity {
 	int grade_id;
 	String token;
 	String url_enroll_me;
-	
+	Activity self;
 	Subject subject_to_remove;
 	
 	private ListView mListView;
@@ -71,23 +79,30 @@ public class SubjectActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_subject);
-
-		adapter = new SubjectAdapter(getApplicationContext(), R.layout.subject_row);
+		self = this;
+		adapter = new StatisticsAdapter(getApplicationContext(), R.layout.statistics_row);
 		setListAdapter(adapter);
 		getListView().setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> adapter2, View arg1, int position,
 					long arg3) {
-				subject_to_remove = adapter.getItem(position);
-				Intent intent = new Intent(getApplicationContext(), EditSubjectActivity.class);
-				intent.putExtra("subject", subject_to_remove.toJSON().toString());
-				startActivityForResult(intent, 300);
+				AlertDialog.Builder builder = new AlertDialog.Builder(self);
+				LinearLayout item = (LinearLayout) LayoutInflater.inflate(self, R.layout.statistics_dialog);
+				
+				TextView myMsg1 = (TextView) item.findViewById(R.id.textView1);
+				TextView myMsg2 = (TextView) item.findViewById(R.id.textView2);
+				myMsg1.setText("Ocene: " + adapter.getItem(position).getGrades());
+				myMsg2.setText("Skupno povprečje: " + adapter.getItem(position).getAllAvg());
+				builder.setView(item);
+				
+				AlertDialog dialog = builder.create();
+				dialog.show();
 				
 			}
 		});
 		URL = SolkoApplication.getDefaultURL();
-		url_get_subjects = "/subjects/get_subjects";
+		url_get_subjects = "/subjects/get_statistics";
 		
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		token = settings.getString("token", "");
@@ -100,10 +115,7 @@ public class SubjectActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-
-	    MenuInflater inflater = getMenuInflater();
-	    inflater.inflate(R.menu.subject, menu);
+		
 	    return super.onCreateOptionsMenu(menu);
 	}
 	
@@ -126,7 +138,7 @@ public class SubjectActivity extends Activity {
     
     private void setupActionBar() {
 		
-		getSupportActionBar().setTitle("PREDMETOVJE");
+		getSupportActionBar().setTitle("STATESTISTIKA");
     	getSupportActionBar().setHomeButtonEnabled(true);
     	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     	
@@ -217,7 +229,7 @@ public class SubjectActivity extends Activity {
 				{
 					try {
 						jsonO = json.getJSONObject(i);
-						Subject cur_subejct = new Subject(jsonO);
+						Subject cur_subejct = new Subject(jsonO, true);
 						adapter.add(cur_subejct);
 						
 					}

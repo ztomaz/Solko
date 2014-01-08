@@ -5,13 +5,17 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import org.holoeverywhere.app.Activity;
+import org.holoeverywhere.preference.DatePreference;
+import org.holoeverywhere.widget.ViewPager;
+import org.holoeverywhere.widget.datetimepicker.date.DatePickerDialog;
+import org.holoeverywhere.widget.datetimepicker.date.DatePickerDialog.OnDateSetListener;
+
 
 import tpo.solko.Interfaces.onRefreshInterface;
 import tpo.solko.R;
 import tpo.solko.SolkoApplication;
 import tpo.solko.obligation.EditObligationActivity;
-import android.app.DatePickerDialog;
-import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,9 +24,6 @@ import android.content.DialogInterface.OnCancelListener;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
-import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -33,7 +34,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 public class HistoryFragmentActivity 
-				extends ActionBarActivity 
+				extends Activity 
 				implements onRefreshInterface{
 	
 	public ViewPager _mViewPager;
@@ -114,28 +115,21 @@ public class HistoryFragmentActivity
 			
 			@Override
 			public void onClick(View v) {
-				OnDateSetListener callBack = new OnDateSetListener() {
+				
+				DatePickerDialog dpd = new DatePickerDialog();
+				dpd.setOnDateSetListener(new OnDateSetListener() {
 					
 					@Override
-					public void onDateSet(DatePicker view, int year, int monthOfYear,
+					public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear,
 							int dayOfMonth) {
 						GregorianCalendar gc = new GregorianCalendar(year, monthOfYear, dayOfMonth, today.get(Calendar.HOUR), today.get(Calendar.MINUTE));
 						change_date(gc);
-					}
-					
-				};
-				DatePickerDialog dpd = new DatePickerDialog(context, callBack , today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH));
-				dpd.setOnCancelListener(new OnCancelListener() {
-					
-					@Override
-					public void onCancel(DialogInterface dialog) {
-						change_date(0);//.setText(sdt.format(date.getTime()).toString());
-						
 						
 					}
 				});
 				
-				dpd.show();
+				
+				dpd.show(getSupportFragmentManager());
 				
 			}
 		});
@@ -170,11 +164,7 @@ public class HistoryFragmentActivity
         ft.commit();
         
     }
-    public void changeTitleText()
-    {
-        setTitle("HISTORY");
-        
-    }
+    
    
    
     private void setupActionBar() {

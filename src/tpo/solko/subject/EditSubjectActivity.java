@@ -3,6 +3,8 @@ package tpo.solko.subject;
 import java.util.ArrayList;
 
 import org.apache.http.HttpResponse;
+import org.holoeverywhere.app.Activity;
+import org.holoeverywhere.widget.ListView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,7 +17,6 @@ import tpo.solko.R.menu;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
@@ -25,9 +26,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
-import android.widget.ListView;
 
-public class EditSubjectActivity extends ActionBarActivity {
+public class EditSubjectActivity extends Activity {
 
 	TimeStampAdapter time_stamp;
 	
@@ -193,8 +193,8 @@ public class EditSubjectActivity extends ActionBarActivity {
     private void setupActionBar() {
 		
 		getSupportActionBar().setTitle(current_subject.toString());
-    	getSupportActionBar().setHomeButtonEnabled(true);
-    	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeButtonEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     	
 	}
 

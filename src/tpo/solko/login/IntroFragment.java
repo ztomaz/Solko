@@ -1,11 +1,13 @@
 package tpo.solko.login;
 
+import org.holoeverywhere.LayoutInflater;
+import org.holoeverywhere.app.Activity;
+import org.holoeverywhere.app.Fragment;
+
 import tpo.solko.Interfaces.onFragmentChangeInterface;
 import tpo.solko.R;
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;

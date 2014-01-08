@@ -1,20 +1,20 @@
 package tpo.solko.login;
 
 
+import org.holoeverywhere.LayoutInflater;
+import org.holoeverywhere.app.Activity;
+import org.holoeverywhere.app.Fragment;
+
 import tpo.solko.Interfaces.OnLoginInterface;
 import tpo.solko.R;
 import tpo.solko.SolkoApplication;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.support.v4.app.Fragment;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;

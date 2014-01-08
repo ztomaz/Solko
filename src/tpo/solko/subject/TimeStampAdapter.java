@@ -3,6 +3,13 @@ package tpo.solko.subject;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
+import org.holoeverywhere.app.Activity;
+import org.holoeverywhere.widget.AdapterView;
+import org.holoeverywhere.widget.AdapterView.OnItemSelectedListener;
+import org.holoeverywhere.widget.Spinner;
+import org.holoeverywhere.widget.datetimepicker.time.RadialPickerLayout;
+import org.holoeverywhere.widget.datetimepicker.time.TimePickerDialog;
+import org.holoeverywhere.widget.datetimepicker.time.TimePickerDialog.OnTimeSetListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,8 +17,6 @@ import org.json.JSONObject;
 import tpo.solko.R;
 import tpo.solko.RestJsonClient;
 import tpo.solko.SolkoApplication;
-import android.app.TimePickerDialog;
-import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -21,10 +26,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -38,9 +40,9 @@ public class TimeStampAdapter extends ArrayAdapter<TimeStamp> {
 	String url_enroll_me;
 	int current_item;
 	
-	Context parent_context;
+	Activity parent_context;
 	
-	public TimeStampAdapter(Context context, int textViewResourceId) {
+	public TimeStampAdapter(Activity context, int textViewResourceId) {
 	    super(context, textViewResourceId);
 	    
 	    SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
@@ -71,8 +73,8 @@ public class TimeStampAdapter extends ArrayAdapter<TimeStamp> {
 	    	final Spinner simple_spinner =  (Spinner) v.findViewById(R.id.spinner1);
 	    	String[] list = parent_context.getResources().getStringArray(R.array.Days);
 	    	final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(),
-	    			android.R.layout.simple_spinner_item, list);
-	    	dataAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+	    			R.layout.simple_spinner_dropdown_item, list);
+	    	dataAdapter.setDropDownViewResource(R.layout.simple_dropdown_item_1line);
 	    	simple_spinner.setAdapter(dataAdapter);
 	    	
 	        TextView tt = (TextView) v.findViewById(R.id.time_info);
@@ -113,16 +115,18 @@ public class TimeStampAdapter extends ArrayAdapter<TimeStamp> {
 				int current_minute = Integer.valueOf(hour_minute[1]);
 				@Override
 				public void onClick(View v) {
-					TimePickerDialog newFragment = new TimePickerDialog(parent_context, new OnTimeSetListener() {
-						
-						@Override
-						public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-							getItem(position).time = (String.format("%02d", hourOfDay)+ ":" + String.format("%02d", minute));
-							notifyDataSetChanged();
-							
-						}
-					}, current_hour, current_minute, true);
-					newFragment.show();
+					TimePickerDialog newFragment = new TimePickerDialog(parent_context, R.layout.time_picker_dialog, 
+							new OnTimeSetListener() {
+								
+								@Override
+								public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
+									getItem(position).time = (String.format("%02d", hourOfDay)+ ":" + String.format("%02d", minute));
+									notifyDataSetChanged();
+									
+								}
+							}, current_hour, current_minute, true);
+					newFragment.show(parent_context);
+					
 				}
 				
 			});

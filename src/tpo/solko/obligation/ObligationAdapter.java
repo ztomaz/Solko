@@ -1,6 +1,14 @@
 package tpo.solko.obligation;
 
 import org.apache.http.HttpResponse;
+import org.holoeverywhere.LayoutInflater;
+import org.holoeverywhere.app.Activity;
+import org.holoeverywhere.app.AlertDialog;
+import org.holoeverywhere.app.AlertDialogFragment;
+import org.holoeverywhere.app.Dialog;
+import org.holoeverywhere.widget.LinearLayout;
+import org.holoeverywhere.widget.NumberPicker;
+import org.holoeverywhere.widget.NumberPicker.OnValueChangeListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,18 +16,13 @@ import org.json.JSONObject;
 import tpo.solko.R;
 import tpo.solko.RestJsonClient;
 import tpo.solko.SolkoApplication;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.PopupMenu;
-import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,9 +32,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.NumberPicker;
-import android.widget.NumberPicker.OnValueChangeListener;
 import android.widget.TextView;
 
 public class ObligationAdapter extends ArrayAdapter<Obligation> {
@@ -43,11 +43,11 @@ public class ObligationAdapter extends ArrayAdapter<Obligation> {
 	int grade_id;
 	int current_item;
 	
-	Context parent_context;
+	Activity parent_context;
 	String url_enroll_me;
 	String url_save_obligation;
 	
-	public ObligationAdapter(Context context, int textViewResourceId) {
+	public ObligationAdapter(Activity context, int textViewResourceId) {
 	    super(context, textViewResourceId);
 
 		url_save_obligation = "/obligations/save_obligation/";
@@ -94,7 +94,7 @@ public class ObligationAdapter extends ArrayAdapter<Obligation> {
 
 
 	private void setupItem(ObjectHolder holder) {
-		holder.name.setText(holder.obligation.toString());
+		holder.name.setText(holder.obligation.subject);
 		holder.type.setText(holder.obligation.type);
 		if (holder.obligation.score.completed==1)
 		{
@@ -128,21 +128,54 @@ public class ObligationAdapter extends ArrayAdapter<Obligation> {
 	            switch (item.getItemId()) {
 	                case R.id.grade_and_done:
 	                	obl.score.completed = 1;
-	                	obl.score.score = 0;
+	                	final Dialog d = new Dialog(parent_context);
 	                	
+	                    d.setTitle("NumberPicker");
+	                    d.setContentView(R.layout.dialog);
+	                    Button b1 = (Button) d.findViewById(R.id.button1);
+	                    Button b2 = (Button) d.findViewById(R.id.button2);
+	                    final NumberPicker np = (NumberPicker) d.findViewById(R.id.numberPicker1);
+	                    np.setMaxValue(10); // max value 100
+	                    np.setMinValue(1);   // min value 0
+	                    np.setWrapSelectorWheel(false);
+	                    np.setOnValueChangedListener(new OnValueChangeListener() {
+							
+							@Override
+							public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+								// TODO Auto-generated method stub
+								
+							}
+						});
+	                    b1.setOnClickListener(new OnClickListener()
+	                    {
+	                     @Override
+	                     public void onClick(View v) {
+
+	 	                		obl.score.score = np.getValue();
+	 	                		d.dismiss();
+	 	                		OceniMe o1 = new OceniMe(obl);
+	 		    	            o1.execute();
+	                      }    
+	                     });
+	                    b2.setOnClickListener(new OnClickListener()
+	                    {
+	                     @Override
+	                     public void onClick(View v) {
+	                         d.dismiss(); // dismiss the dialog
+	                      }    
+	                     });
+	                  d.show();
 	                	
-	    	            OceniMe o1 = new OceniMe(obl);
-	    	            o1.execute();
 	                    return true;
 	                case R.id.done:
 	                	obl.score.completed = 1;
-
+	                	obl.score.score = 1;
 	    	            OceniMe o2 = new OceniMe(obl);
 	    	            o2.execute();
 	    	            return true;
 	                case R.id.failed:
 	                	obl.score.completed = 2;
-
+	                	obl.score.score = -1;
 	    	            OceniMe o3 = new OceniMe(obl);
 	    	            o3.execute();
 	                    return true;

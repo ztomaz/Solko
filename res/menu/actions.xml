@@ -2,10 +2,10 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/grade_and_done"
-          android:title="Označit kot opravljeno in oceni"
+          android:title="Označi kot opravljeno in oceni"
           android:showAsAction="ifRoom"/>
     <item android:id="@+id/done"
           android:title="Označi kot opravljeno" />
     <item android:id="@+id/failed"
-          android:title="Označi kod neopravljeno" />
+          android:title="Označi kot neopravljeno" />
 </menu>

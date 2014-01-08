@@ -8,6 +8,10 @@ import java.util.List;
 import java.util.Locale;
 
 import org.apache.http.HttpResponse;
+import org.holoeverywhere.app.Activity;
+import org.holoeverywhere.widget.Spinner;
+import org.holoeverywhere.widget.datetimepicker.date.DatePickerDialog;
+import org.holoeverywhere.widget.datetimepicker.date.DatePickerDialog.OnDateSetListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,15 +27,11 @@ import tpo.solko.subject.SubjectAdapter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,10 +44,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-public class EditObligationActivity extends ActionBarActivity {
+public class EditObligationActivity extends Activity {
 
 	//ObligationAdapter adapter_obligations;
 	SubjectAdapter adapter_subjects;
@@ -72,6 +71,7 @@ public class EditObligationActivity extends ActionBarActivity {
 	ArrayAdapter<String> subject_type;
 	Spinner type_spinner;
 	CheckBox personal;
+	TextView ocena;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -88,7 +88,7 @@ public class EditObligationActivity extends ActionBarActivity {
 		obligation_name_et = (EditText) findViewById(R.id.obligation_name_et);
 		
 		String s = getIntent().getStringExtra("obligation");
-		
+		ocena = (TextView) findViewById(R.id.ocena);
 		obligation_name_et = (EditText) findViewById(R.id.obligation_name_et);
 		obligation_date = (TextView) findViewById(R.id.obligation_date);
 		
@@ -112,29 +112,20 @@ public class EditObligationActivity extends ActionBarActivity {
 			
 			@Override
 			public void onClick(View v) {
-				OnDateSetListener callBack = new OnDateSetListener() {
+				
+				DatePickerDialog dpd = new DatePickerDialog();
+				dpd.setOnDateSetListener(new OnDateSetListener() {
 					
 					@Override
-					public void onDateSet(DatePicker view, int year, int monthOfYear,
+					public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear,
 							int dayOfMonth) {
 						date = new GregorianCalendar(year, monthOfYear, dayOfMonth, date.get(Calendar.HOUR), date.get(Calendar.MINUTE));
 						obligation_date.setText(sdt.format(date.getTime()).toString());
 						
 					}
-					
-				};
-				DatePickerDialog dpd = new DatePickerDialog(context, callBack , date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
-				dpd.setOnCancelListener(new OnCancelListener() {
-					
-					@Override
-					public void onCancel(DialogInterface dialog) {
-						obligation_date.setText(sdt.format(date.getTime()).toString());
-						
-						
-					}
 				});
 				
-				dpd.show();
+				dpd.show(getSupportFragmentManager());
 				
 			}
 		});
@@ -243,6 +234,15 @@ public class EditObligationActivity extends ActionBarActivity {
 			obligation_name_et.setText(current_obligation.name);
 			date = current_obligation.date;
 			obligation_date.setText(sdt.format(date.getTime()).toString());
+			if (current_obligation.score!=null &&
+					current_obligation.score.score > 0)
+			{
+				ocena.setText(String.valueOf(current_obligation.score.score));
+			}
+			else
+			{
+				ocena.setText("Ni ocenjeno");
+			}
 			for (int i = 0; i < subject_type.getCount(); i++)
 			{
 				if (current_obligation.type != null && current_obligation.type.equalsIgnoreCase(subject_type.getItem(i)))
@@ -357,7 +357,7 @@ public class EditObligationActivity extends ActionBarActivity {
     
     private void setupActionBar() {
 		
-		//getSupportActionBar().setTitle(current_obligation.toString());
+		getSupportActionBar().setTitle("UREDI OBVEZNOST");
     	getSupportActionBar().setHomeButtonEnabled(true);
     	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     	

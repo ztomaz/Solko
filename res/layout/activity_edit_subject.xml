@@ -22,14 +22,14 @@
         <requestFocus />
     </EditText>
 
-    <ListView
+    <org.holoeverywhere.widget.ListView
         android:id="@+id/list_of_times"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editText1"
         android:layout_below="@+id/textView1" >
 
-    </ListView>
+    </org.holoeverywhere.widget.ListView>
 
     <ImageButton
         android:id="@+id/add_new_time"
@@ -48,5 +48,6 @@
         android:layout_centerHorizontal="true"
         android:text="Urnik"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
 
 </RelativeLayout>

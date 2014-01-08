@@ -1,41 +1,57 @@
 <!-- A DrawerLayout is intended to be used as the top-level content view using match_parent for both width and height to consume the full space available. -->
 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="fill_parent"
+    android:padding="10dp" >
 
+    <org.holoeverywhere.widget.ListView
+        android:id="@+id/quick_obligations"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="fill_parent" >
+
+    </org.holoeverywhere.widget.ListView>
 
     <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    	android:padding="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_weight="1"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@color/dark_grey"
+        android:layout_height="fill_parent">
 
-    <Button
-        android:id="@+id/subjects_button"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="10dp"
-        android:layout_above="@+id/button4"
-        android:layout_alignLeft="@+id/button4"
-        android:background="@drawable/button2"
-        android:text="Predmeti" />
+        <Button
+            android:id="@+id/subjects_button"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_above="@+id/statistics_button"
+            android:layout_alignLeft="@+id/statistics_button"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/button2"
+            android:text="PREDMETI" />
 
-    <Button
-        android:id="@+id/obveznost_button"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="10dp"
-        android:layout_above="@+id/subjects_button"
-        android:layout_alignLeft="@+id/button4"
-        android:background="@drawable/button2"
-        android:text="Obveznosti" />
+        <Button
+            android:id="@+id/obveznost_button"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_above="@+id/subjects_button"
+            android:layout_alignLeft="@+id/statistics_button"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/button2"
+            android:text="OBVEZNOSTI" />
 
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="10dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/button2"
-        android:text="Statistika za piflarje" />
-
+        <Button
+            android:id="@+id/statistics_button"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/button2"
+            android:text="STATISTIKA ZA PIFLARJE" />
     </RelativeLayout>
+
+
+</LinearLayout>
