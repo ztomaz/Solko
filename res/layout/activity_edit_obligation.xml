@@ -70,7 +70,6 @@
         android:layout_alignLeft="@+id/predmetovje"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textView2"
-        android:background="@drawable/abc_spinner_ab_holo_light"
         android:padding="10dp" />
 
     <EditText
@@ -93,7 +92,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/textView4"
         android:layout_toRightOf="@+id/textView4"
-        android:background="@drawable/abc_spinner_ab_holo_light"
         android:padding="10dp" />
 
     <org.holoeverywhere.widget.CheckBox
@@ -113,7 +111,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="Large Text"
+        android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

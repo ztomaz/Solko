@@ -21,7 +21,7 @@
         android:id="@+id/subject_text"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.33"
+        android:layout_weight="0.43"
         android:gravity="center"
         android:padding = "10dp"
         android:text="Ime obligacije"

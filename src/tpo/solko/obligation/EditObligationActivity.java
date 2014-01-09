@@ -93,7 +93,12 @@ public class EditObligationActivity extends Activity {
 		obligation_date = (TextView) findViewById(R.id.obligation_date);
 		
 		type_spinner = (Spinner) findViewById(R.id.spinner1);
-		subject_type = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item);
+		/*
+		 * 
+		 * 
+		 * DRKEJ TUKEJ
+		 */
+		subject_type = new ArrayAdapter<String>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item);
 		 
 		for (String st: getResources().getStringArray(R.array.Types))
         {

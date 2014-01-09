@@ -38,6 +38,11 @@ public class RegistrationFragment extends DialogFragment  {
 	EditText passwordView;
 	EditText firstNameView;
 	EditText lastNameView;
+
+	EditText stevilkaView;
+	EditText crkaView;
+
+	
 	String register_email;
 	String register_password;
 	String register_first_name;
@@ -74,6 +79,8 @@ public class RegistrationFragment extends DialogFragment  {
         school_adapter = new ArrayAdapter<School> (getActivity(), android.R.layout.simple_spinner_item, new ArrayList<School>());
         spinner_schools.setAdapter(school_adapter);
         
+        stevilkaView = (EditText) v.findViewById(R.id.stevilka);
+        crkaView = (EditText) v.findViewById(R.id.crka);
         
         
         login.setOnClickListener(new OnClickListener()
@@ -98,6 +105,10 @@ public class RegistrationFragment extends DialogFragment  {
 		register_password = passwordView.getText().toString();
 		register_first_name = firstNameView.getText().toString();
 		register_last_name = lastNameView.getText().toString();
+
+		grade_number = crkaView.getText().toString();
+		grade_letter = crkaView.getText().toString();
+		
 		if (register_first_name.length()<1)
 		{
 			firstNameView.setError("Please write your first name");
@@ -115,6 +126,7 @@ public class RegistrationFragment extends DialogFragment  {
 		{
 			passwordView.setError("the password needs to be at least 6 letters long");
 		}
+		
 		/*else if (!register_password.equals(passwordViewRe.getText().toString()))
 		{
 			passwordView.setError("passwords don't match");
@@ -212,8 +224,6 @@ public class UserRegisterTask extends AsyncTask<Void, Void, Boolean> {
 		
 		int selected_school = school_adapter.getItem(spinner_schools.getSelectedItemPosition()).id;
 		nameValuePairs.add(new BasicNameValuePair("school_id", String.valueOf(selected_school)));
-		grade_number = "1";
-		grade_letter = "a";
 		nameValuePairs.add(new BasicNameValuePair("email", register_email));
 		nameValuePairs.add(new BasicNameValuePair("grade_number", grade_number));
 		nameValuePairs.add(new BasicNameValuePair("grade_letter", grade_letter.toLowerCase()));

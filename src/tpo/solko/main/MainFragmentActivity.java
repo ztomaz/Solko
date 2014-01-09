@@ -38,7 +38,7 @@ public class MainFragmentActivity extends Activity {
 	String URL;
 	String url_get_quick_obligations;
 	int grade_id;
-	
+	GetObligationByDay gobd;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -88,7 +88,7 @@ public class MainFragmentActivity extends Activity {
 		setTitle("ŠOLKO");
 		
 
-		GetObligationByDay gobd = new GetObligationByDay();
+		gobd = new GetObligationByDay();
 		gobd.execute();
 	}
 
@@ -122,9 +122,11 @@ public class MainFragmentActivity extends Activity {
 	@Override
 	public void onResume() {
 	    super.onResume();  // Always call the superclass method first
-
-		GetObligationByDay gobd = new GetObligationByDay();
-		gobd.execute();
+	    if (gobd == null || gobd.getStatus()!=AsyncTask.Status.RUNNING)
+	    {
+			gobd = new GetObligationByDay();
+			gobd.execute();
+		}
 	    
 	}
 	private class GetObligationByDay extends AsyncTask<Void, Integer, JSONArray>
@@ -180,7 +182,7 @@ public class MainFragmentActivity extends Activity {
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
-        	
+        	gobd = null;
         }  
         
 	}

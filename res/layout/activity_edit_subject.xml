@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/list_of_times"
         android:layout_below="@+id/name_of_subject"
-        android:background="@drawable/ic_action_new"
+        android:src="@drawable/ic_action_new"
         android:text="Button" />
 
     <TextView

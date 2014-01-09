@@ -138,7 +138,7 @@ public class StatisticsActivity extends Activity {
     
     private void setupActionBar() {
 		
-		getSupportActionBar().setTitle("STATESTISTIKA");
+		getSupportActionBar().setTitle("STATISTIKA");
     	getSupportActionBar().setHomeButtonEnabled(true);
     	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     	
